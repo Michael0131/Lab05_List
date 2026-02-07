@@ -1,26 +1,26 @@
 ﻿  testList.cpp
-F:\Winter_2026\CSE331\Lab05\testList.h(135,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(135,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-F:\Winter_2026\CSE331\Lab05\testList.h(136,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(136,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-F:\Winter_2026\CSE331\Lab05\testList.h(149,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(149,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-F:\Winter_2026\CSE331\Lab05\testList.h(150,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(150,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-F:\Winter_2026\CSE331\Lab05\testList.h(163,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(163,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-F:\Winter_2026\CSE331\Lab05\testList.h(164,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(164,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-F:\Winter_2026\CSE331\Lab05\testList.h(202,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(202,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-F:\Winter_2026\CSE331\Lab05\testList.h(203,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
+C:\Users\jamga\Documents\Lab05_List\testList.h(203,17): warning C4312: 'type cast': conversion from 'unsigned int' to 'custom::list<int>::Node *' of greater size
   (compiling source file 'testList.cpp')
   
-  LabList.vcxproj -> F:\Winter_2026\CSE331\Lab05\x64\Debug\LabList.exe
+  LabList.vcxproj -> C:\Users\jamga\Documents\Lab05_List\x64\Debug\LabList.exe

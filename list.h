@@ -200,11 +200,11 @@ namespace custom
         }
 
         // equals, not equals operator
-        // ---------- James Code To Complete ----------
-        bool operator == (const iterator& rhs) const { return true; }
+        // ---------- James Code ----------
+        bool operator == (const iterator& rhs) const { return p == rhs.p; }
 
-        // ---------- James Code To Complete ----------
-        bool operator != (const iterator& rhs) const { return true; }
+        // ---------- James Code ----------
+        bool operator != (const iterator& rhs) const { return p != rhs.p; }
 
         // dereference operator, fetch a node
         // ---------- Brayden Code To Complete ----------
@@ -217,13 +217,16 @@ namespace custom
         // ---------- James Code To Complete ----------
         iterator operator ++ (int postfix)
         {
-            return *this;
+            iterator temp(*this);
+            p = p->pNext;
+            return temp;
         }
 
         // prefix increment
         // ---------- James Code To Complete ----------
         iterator& operator ++ ()
         {
+            p = p->pNext;
             return *this;
         }
 
@@ -231,13 +234,16 @@ namespace custom
         // ---------- James Code To Complete ----------
         iterator operator -- (int postfix)
         {
-            return *this;
+            iterator temp(*this);
+            p = p->pPrev;
+            return temp;
         }
 
         // prefix decrement
         // ---------- James Code To Complete ----------
         iterator& operator -- ()
         {
+            p = p->pPrev;
             return *this;
         }
 
@@ -452,18 +458,36 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(1)
      *********************************************/
-     // ---------- James Code To Complete ----------
+     // ---------- James Code ----------
     template <typename T>
     void list <T> ::push_front(const T& data)
     {
-        
+       Node* pNew = new Node(data);
+
+       pNew->pNext = pHead;
+       if (pHead)
+         pHead->pPrev = pNew;
+       else
+         pTail = pNew;
+
+       pHead = pNew;
+       numElements++;
     }
 
-    // ---------- James Code To Complete ----------
+    // ---------- James Code----------
     template <typename T>
     void list <T> ::push_front(T&& data)
     {
-       
+       Node* pNew = new Node(data);
+
+       pNew->pNext = pHead;
+       if (pHead)
+          pHead->pPrev = pNew;
+       else
+          pTail = pNew;
+
+       pHead = pNew;
+       numElements++;
     }
 
 
@@ -488,11 +512,33 @@ namespace custom
      *    OUTPUT :
      *    COST   : O(1)
      *********************************************/
-     // ---------- James Code To Complete ----------
+     // ---------- James Code ----------
     template <typename T>
     void list <T> ::pop_front()
     {
-    
+       // If there is no pHead, don't even bother
+       if (!pHead)
+          return;
+
+       // Note the node we need to delete
+       Node* pToDelete = pHead;
+       
+       // Dislink the next node if it exists and move the head
+       if (pHead != pTail)
+       {
+         pHead->pNext->pPrev = nullptr;
+         pHead = pHead->pNext;
+       }
+       // Set both to nullptr if no next node exists
+       else
+       {
+          pHead = nullptr;
+          pTail = nullptr;
+       }
+
+       // Delete the node and decrement
+       delete pToDelete;
+       numElements--;
     }
 
     /*********************************************
@@ -502,11 +548,13 @@ namespace custom
      *     OUTPUT : data to be displayed
      *     COST   : O(1)
      *********************************************/
-     // ---------- James Code To Complete ----------
+     // ---------- James Code----------
     template <typename T>
     T& list <T> ::front()
     {
-        return *(new T);
+        if (empty())
+           throw "ERROR: unable to access data from an empty list";
+        return pHead->data;
     }
 
     /*********************************************
@@ -516,11 +564,14 @@ namespace custom
      *     OUTPUT : data to be displayed
      *     COST   : O(1)
      *********************************************/
-     // ---------- James Code To Complete ----------
+     // ---------- James Code----------
     template <typename T>
     T& list <T> ::back()
     {
-        return *(new T);
+       if (empty())
+          throw "ERROR: unable to access data from an empty list";
+       return pTail->data;
+       
     }
 
     /******************************************
