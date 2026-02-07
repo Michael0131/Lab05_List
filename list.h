@@ -178,25 +178,31 @@ namespace custom
     public:
         // constructors, destructors, and assignment operator
 
-        // ---------- Brayden Code To Complete ----------
+        // ---------- Brayden Code ----------
         iterator()
         {
-            p = new typename list <T> ::Node;
+           p = nullptr;
         }
-        // ---------- Brayden Code To Complete ----------
+        // ---------- Brayden Code ----------
         iterator(Node* pIn)
         {
-            p = new typename list <T> ::Node;
+           p = pIn;
+
         }
-        // ---------- Brayden Code To Complete ----------
+        // ---------- Brayden Code ----------
         iterator(const iterator& rhs)
         {
-            p = rhs.p;
+           p = rhs.p;
         }
-        // ---------- Brayden Code To Complete ----------
+        // ---------- Brayden Code ----------
         iterator& operator = (const iterator& rhs)
         {
-            return* this;
+           if (this != &rhs)
+           {
+              p = rhs.p;
+           }
+           
+           return *this;
         }
 
         // equals, not equals operator
@@ -207,10 +213,11 @@ namespace custom
         bool operator != (const iterator& rhs) const { return true; }
 
         // dereference operator, fetch a node
-        // ---------- Brayden Code To Complete ----------
+        // ---------- Brayden Code ----------
         T& operator * ()
         {
-            return *(new T);
+           assert(p != nullptr);
+           return p->data;
         }
 
         // postfix increment
@@ -402,12 +409,14 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(n) with respect to the number of nodes
      *********************************************/
-     // ---------- Brayden Code To Complete ----------
+     // ---------- Brayden Code ----------
     template <typename T>
-    list <T>& list <T> :: operator = (const std::initializer_list<T>& rhs)
+    list <T>& list <T> :: operator = (const std::initializer_list<T>& il)
     {
-        return *this;
- 
+       list<T> tmp(il);  // build a temporary list from the initializer values
+       this->swap(tmp);  // swap head/tail/size; tmp now holds old nodes
+       return *this;     // tmp's destructor clears old nodes (when it falls out of scope)
+
     }
 
     /**********************************************
@@ -417,11 +426,22 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(n) with respect to the number of nodes
      *********************************************/
-     // ---------- Brayden Code To Complete ----------
+     // ---------- Brayden Code ----------
     template <typename T>
     void list <T> ::clear()
     {
-    
+       // Start at the head
+       Node* cur = pHead;
+       while (cur)
+       {
+          Node* next = cur->pNext;
+          delete cur; // Delete every single node in the list
+          cur = next;
+       }
+
+       pHead = nullptr;
+       pTail = nullptr;
+       numElements = 0;
     }
 
     /*********************************************
@@ -431,18 +451,47 @@ namespace custom
      *    OUTPUT :
      *    COST   : O(1)
      *********************************************/
-     // ---------- Brayden Code To Complete ----------
-    template <typename T>
+     // ---------- Brayden Code ----------
+    template <typename T> // copy
     void list <T> ::push_back(const T& data)
     {
-       
+        Node* n = new Node(data); // copy to make a new node
+
+        // empty list
+        if (pHead == nullptr)
+        {
+            pHead = pTail = n;
+            numElements = 1;
+            return;
+        }
+
+        // attach at tail
+        n->pPrev = pTail;
+        pTail->pNext = n;
+        pTail = n; // update tail
+        ++numElements;
     }
 
-    // ---------- Brayden Code To Complete ----------
-    template <typename T>
+    // ---------- Brayden Code ----------
+    template <typename T> // move
     void list <T> ::push_back(T&& data)
     {
-        
+       Node* n = new Node(std::move(data)); // move to make a new node (value is rvalue/temporary)
+
+       // empty list
+       if (pHead == nullptr)
+       {
+          pHead = pTail = n;
+          numElements = 1;
+          return;
+       }
+
+       // attach at tail
+       n->pPrev = pTail;
+       pTail->pNext = n;
+       pTail = n; // update tail
+       ++numElements;
+       
     }
 
     /*********************************************
@@ -474,11 +523,32 @@ namespace custom
      *    OUTPUT :
      *    COST   : O(1)
      *********************************************/
-     // ---------- Brayden Code To Complete ----------
+     // ---------- Brayden Code ----------
     template <typename T>
     void list <T> ::pop_back()
     {
-        
+       // empty
+       if (pTail == nullptr)
+       {
+          return;
+       }
+
+       Node* oldTail = pTail;
+
+       // single element
+       if (pHead == pTail)
+       {
+          pHead = pTail = nullptr;
+          numElements = 0;
+          delete oldTail;
+          return;
+       }
+       
+       // more than one element
+       pTail = pTail->pPrev;
+       pTail->pNext = nullptr;
+       --numElements;
+       delete oldTail;
     }
 
     /*********************************************
@@ -530,11 +600,32 @@ namespace custom
      *     OUTPUT : iterator to the new location
      *     COST   : O(1)
      ******************************************/
-     // ---------- Brayden Code To Complete ----------
+     // ---------- Brayden Code ----------
     template <typename T>
     typename list <T> ::iterator  list <T> ::erase(const list <T> ::iterator& it)
     {
-        return end();
+
+       if (pHead == nullptr || it.p == nullptr)  // end() or empty
+          return end();
+
+       Node* cur = it.p;
+       Node* next = cur->pNext;
+       Node* prev = cur->pPrev;
+
+       if (prev)
+          prev->pNext = next;
+       else
+          pHead = next;
+
+       if (next)
+          next->pPrev = prev;
+       else
+          pTail = prev;
+
+       delete cur;
+       --numElements;
+
+       return iterator(next); // if next nullptr -> end()
     }
 
     /******************************************
