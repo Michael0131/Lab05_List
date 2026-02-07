@@ -15,7 +15,7 @@
  *        List         : A class that represents a List
  *        ListIterator : An iterator through List
  * Author
- *    Michael, Brayden, James
+ *    Michael Johnson, Brayden Jones, James Gassaway
  ************************************************************************/
 
 #pragma once
@@ -136,19 +136,16 @@ namespace custom
         //
         // Construct
         //
-        // ---------- Michael Code To Complete ----------
         Node()
         {
             data = T();
             pNext = pPrev = nullptr;
         }
-        // ---------- Michael Code To Complete ----------
         Node(const T& data)
         {
             this->data = data;
             pNext = pPrev = nullptr;
         }
-        // ---------- Michael Code To Complete ----------
         Node(T&& data)
         {
             this->data = std::move(data);
@@ -178,23 +175,19 @@ namespace custom
     public:
         // constructors, destructors, and assignment operator
 
-        // ---------- Brayden Code ----------
         iterator()
         {
            p = nullptr;
         }
-        // ---------- Brayden Code ----------
         iterator(Node* pIn)
         {
            p = pIn;
 
         }
-        // ---------- Brayden Code ----------
         iterator(const iterator& rhs)
         {
            p = rhs.p;
         }
-        // ---------- Brayden Code ----------
         iterator& operator = (const iterator& rhs)
         {
            if (this != &rhs)
@@ -206,14 +199,10 @@ namespace custom
         }
 
         // equals, not equals operator
-        // ---------- James Code ----------
         bool operator == (const iterator& rhs) const { return p == rhs.p; }
-
-        // ---------- James Code ----------
         bool operator != (const iterator& rhs) const { return p != rhs.p; }
 
         // dereference operator, fetch a node
-        // ---------- Brayden Code ----------
         T& operator * ()
         {
            assert(p != nullptr);
@@ -221,7 +210,6 @@ namespace custom
         }
 
         // postfix increment
-        // ---------- James Code To Complete ----------
         iterator operator ++ (int postfix)
         {
             iterator temp(*this);
@@ -230,7 +218,6 @@ namespace custom
         }
 
         // prefix increment
-        // ---------- James Code To Complete ----------
         iterator& operator ++ ()
         {
             p = p->pNext;
@@ -238,7 +225,6 @@ namespace custom
         }
 
         // postfix decrement
-        // ---------- James Code To Complete ----------
         iterator operator -- (int postfix)
         {
             iterator temp(*this);
@@ -247,7 +233,6 @@ namespace custom
         }
 
         // prefix decrement
-        // ---------- James Code To Complete ----------
         iterator& operator -- ()
         {
             p = p->pPrev;
@@ -268,7 +253,6 @@ namespace custom
      * LIST :: NON-DEFAULT constructors
      * Create a list initialized to a value
      ****************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T> ::list(size_t num, const T& t)
     {
@@ -282,7 +266,6 @@ namespace custom
      * LIST :: ITERATOR constructors
      * Create a list initialized to a set of values
      ****************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     template <class Iterator>
     list <T> ::list(Iterator first, Iterator last)
@@ -297,7 +280,6 @@ namespace custom
      * LIST :: INITIALIZER constructors
      * Create a list initialized to a set of values
      ****************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T> ::list(const std::initializer_list<T>& il)
     {
@@ -311,7 +293,6 @@ namespace custom
      * LIST :: NON-DEFAULT constructors
      * Create a list initialized to a value
      ****************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T> ::list(size_t num)
     {
@@ -324,7 +305,6 @@ namespace custom
     /*****************************************
      * LIST :: DEFAULT constructors
      ****************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T> ::list()
     {
@@ -335,7 +315,6 @@ namespace custom
     /*****************************************
      * LIST :: COPY constructors
      ****************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T> ::list(list& rhs)
     {
@@ -349,7 +328,6 @@ namespace custom
      * LIST :: MOVE constructors
      * Steal the values from the RHS
      ****************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T> ::list(list <T>&& rhs)
     {
@@ -368,7 +346,6 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(n) with respect to the size of the LHS
      *********************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T>& list <T> :: operator = (list <T>&& rhs)
     {
@@ -394,7 +371,6 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(n) with respect to the number of nodes
      *********************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     list <T>& list <T> :: operator = (list <T>& rhs)
     {
@@ -415,7 +391,6 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(n) with respect to the number of nodes
      *********************************************/
-     // ---------- Brayden Code ----------
     template <typename T>
     list <T>& list <T> :: operator = (const std::initializer_list<T>& il)
     {
@@ -432,7 +407,6 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(n) with respect to the number of nodes
      *********************************************/
-     // ---------- Brayden Code ----------
     template <typename T>
     void list <T> ::clear()
     {
@@ -457,7 +431,6 @@ namespace custom
      *    OUTPUT :
      *    COST   : O(1)
      *********************************************/
-     // ---------- Brayden Code ----------
     template <typename T> // copy
     void list <T> ::push_back(const T& data)
     {
@@ -478,7 +451,6 @@ namespace custom
         ++numElements;
     }
 
-    // ---------- Brayden Code ----------
     template <typename T> // move
     void list <T> ::push_back(T&& data)
     {
@@ -507,7 +479,6 @@ namespace custom
      *     OUTPUT :
      *     COST   : O(1)
      *********************************************/
-     // ---------- James Code ----------
     template <typename T>
     void list <T> ::push_front(const T& data)
     {
@@ -523,7 +494,6 @@ namespace custom
        numElements++;
     }
 
-    // ---------- James Code----------
     template <typename T>
     void list <T> ::push_front(T&& data)
     {
@@ -547,7 +517,6 @@ namespace custom
      *    OUTPUT :
      *    COST   : O(1)
      *********************************************/
-     // ---------- Brayden Code ----------
     template <typename T>
     void list <T> ::pop_back()
     {
@@ -582,7 +551,6 @@ namespace custom
      *    OUTPUT :
      *    COST   : O(1)
      *********************************************/
-     // ---------- James Code ----------
     template <typename T>
     void list <T> ::pop_front()
     {
@@ -618,7 +586,6 @@ namespace custom
      *     OUTPUT : data to be displayed
      *     COST   : O(1)
      *********************************************/
-     // ---------- James Code----------
     template <typename T>
     T& list <T> ::front()
     {
@@ -634,7 +601,6 @@ namespace custom
      *     OUTPUT : data to be displayed
      *     COST   : O(1)
      *********************************************/
-     // ---------- James Code----------
     template <typename T>
     T& list <T> ::back()
     {
@@ -651,7 +617,6 @@ namespace custom
      *     OUTPUT : iterator to the new location
      *     COST   : O(1)
      ******************************************/
-     // ---------- Brayden Code ----------
     template <typename T>
     typename list <T> ::iterator  list <T> ::erase(const list <T> ::iterator& it)
     {
@@ -687,7 +652,6 @@ namespace custom
      *     OUTPUT : iterator to the new item
      *     COST   : O(1)
      ******************************************/
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     typename list <T> ::iterator list <T> ::insert(list <T> ::iterator it,
         const T& data)
@@ -729,7 +693,6 @@ namespace custom
         return iterator(n);
     }
 
-    // ---------- Michael Code To Complete ----------
     template <typename T>
     typename list <T> ::iterator list <T> ::insert(list <T> ::iterator it,
         T&& data)
@@ -778,14 +741,12 @@ namespace custom
      *     COST   : O(n) with respect to the size of the LHS
      *********************************************/
 
-     // ---------- Michael Code To Complete ----------
     template <typename T>
     void swap(list <T>& lhs, list <T>& rhs)
     {
         lhs.swap(rhs);
     }
 
-    // ---------- Michael Code To Complete ----------
     template <typename T>
     void list<T>::swap(list <T>& rhs)
     {
